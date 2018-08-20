@@ -13,8 +13,6 @@ namespace GitHubSearch.Controllers
     {
         public ActionResult Index()
         {
-            //ViewBag.Title = "Home Page";
-
             return View();
         }
 
@@ -50,6 +48,5 @@ namespace GitHubSearch.Controllers
             Bookmark newBookmark = new Bookmark() {Name = name,Avatar = avatar};
             service.SetBookmark(newBookmark);
         }
-
     }
 }
