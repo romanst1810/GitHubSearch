@@ -1,24 +1,57 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+﻿<div class="row" ng-controller="homeController">
+    <div class="form-horizontal searchDiv col-md-12" role="form">
+        <div class="form-group">
+            <div class="col-md-2">
+                <button class="btn btn-info" data-ng-click="ShowSearchResults()" type="button" ng-disabled="searchResultDisabled">Show Search Results</button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info" data-ng-click="ShowSavedBookmarks()" type="button" ng-disabled="bookmarksDisabled">Show Saved Bookmarks</button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+
+    <div class="form-horizontal searchDiv col-md-12" role="form">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Search Text:</label>
+            <div class="col-md-3">
+                <input type="text" data-ng-model="searchText" placeholder="Enter Search Text" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" data-ng-click="Search(searchText)" type="button">Search</button>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+
+    <div class="col-md-12 searchResults" ng-hide="searchResultDisabledList">
+        <div class="searchLabel"><label class="col-md-2 control-label">Search Results:</label></div>
+            <ul>
+                <li class="row list-unstyled-odd list-group-item" ng-repeat="result in results">
+                    <div class="col-md-2">
+                        <img ng-src="{{result.Avatar}}" alt="" height="42" width="42">
+                    </div>
+                    <label class="col-md-3 control-label">{{result.Name}}</label>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary" data-ng-click="toBookmark(result.Name,result.Avatar)" type="button">Bookmark</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    <div class="col-md-12 searchResults" ng-hide="bookmarksDisabledList">
+        <div class="searchLabel"><label class="col-md-2 control-label ">Saved Bookmarks:</label></div>
+       
+        <ul>
+            <li class="row list-unstyled-odd list-group-item" ng-repeat="result in bookmarks">
+                <div class="col-md-2">
+                    <img ng-src="{{result.Avatar}}" alt="" height="42" width="42">
+                </div>
+                <label class="col-md-3 control-label">{{result.Name}}</label>
+
+            </li>
+        </ul>
     </div>
-</div>
+
+    </div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/AngularJS/githubsearch.js"></script>

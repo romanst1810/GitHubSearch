@@ -8,7 +8,29 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+.searchDiv {
+    padding-top: 23px;
+}
+.searchResults {
+    padding-top: 40px;
+}
+.searchLabel {
+    padding-top: 23px;
+    padding-bottom: 23px;
+}
+/*li {
+    display: list-item;
+}
 
+ul { 
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+}*/
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
