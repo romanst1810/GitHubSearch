@@ -20,9 +20,8 @@ namespace GitHubSearch.Controllers
         {
 
             SearchResultModel result = new SearchResultModel();
-            string uri = $"https://api.github.com/search/repositories?q={search}";
             IGitHubSearch service = new GitHubService();
-            GithubJsonObject searchJsonResult = service.SearchGitHubResult(uri);
+            GithubJsonObject searchJsonResult = service.SearchGitHubResult(search);
             foreach (var jres in searchJsonResult.Items)
             {
                 Bookmark bm = new Bookmark

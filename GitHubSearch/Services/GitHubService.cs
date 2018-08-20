@@ -11,7 +11,8 @@ namespace GitHubSearch.Services
     {
         public GithubJsonObject SearchGitHubResult(string searchUri)
         {
-            var jsonData = GetResponseFromUri(searchUri);
+            string uri = $"https://api.github.com/search/repositories?q={searchUri}";
+            var jsonData = GetResponseFromUri(uri);
             JavaScriptSerializer js = new JavaScriptSerializer();
             GithubJsonObject githubJsonObject = js.Deserialize<GithubJsonObject>(jsonData);
             return githubJsonObject;
