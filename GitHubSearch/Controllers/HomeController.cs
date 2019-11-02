@@ -19,18 +19,8 @@ namespace GitHubSearch.Controllers
         public ActionResult SearchGitHubResult(string search)
         {
 
-            SearchResultModel result = new SearchResultModel();
             IGitHubSearch service = new GitHubService();
-            GithubJsonObject searchJsonResult = service.SearchGitHubResult(search);
-            foreach (var jres in searchJsonResult.Items)
-            {
-                Bookmark bm = new Bookmark
-                {
-                    Name = jres.Name,
-                    Avatar = jres.Owner.Avatar_Url
-                };
-                result.Items.Add(bm);
-            }
+            SearchResultModel result = service.SearchGitHubResult(search) ?? new SearchResultModel();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

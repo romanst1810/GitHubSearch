@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using GitHubSearch.Interfaces;
 using GitHubSearch.Models;
@@ -9,13 +8,24 @@ namespace GitHubSearch.Services
 {
     public class GitHubService : IGitHubSearch
     {
-        public GithubJsonObject SearchGitHubResult(string searchUri)
+        public SearchResultModel SearchGitHubResult(string searchUri)
         {
             string uri = $"https://api.github.com/search/repositories?q={searchUri}";
             var jsonData = GetResponseFromUri(uri);
             JavaScriptSerializer js = new JavaScriptSerializer();
             GithubJsonObject githubJsonObject = js.Deserialize<GithubJsonObject>(jsonData);
-            return githubJsonObject;
+            
+            SearchResultModel result = new SearchResultModel();
+            foreach (var jres in githubJsonObject.Items)
+            {
+                Bookmark bm = new Bookmark
+                {
+                    Name = jres.Name,
+                    Avatar = jres.Owner.Avatar_Url
+                };
+                result.Items.Add(bm);
+            }
+            return result;
         }
 
         string GetResponseFromUri(string uri)

@@ -11,16 +11,13 @@ namespace GitHubSearch.Services
     {
         public void SetBookmark(Bookmark requestBookmark)
         {
-            List<Bookmark> newBookmarkList = new List<Bookmark>();
-            Bookmark bookmark = new Bookmark { Name = requestBookmark.Name, Avatar = requestBookmark.Avatar };
-
             List<Bookmark> sessionBookmarks = HttpContext.Current.Session["Bookmarks"] as List<Bookmark>;
-            if (sessionBookmarks != null)
+            if (sessionBookmarks == null)
             {
-                newBookmarkList.AddRange(sessionBookmarks);
+                sessionBookmarks = new List<Bookmark>();
             }
-            newBookmarkList.Add(bookmark);
-            HttpContext.Current.Session["Bookmarks"] = newBookmarkList;
+            sessionBookmarks.Add(requestBookmark);
+            HttpContext.Current.Session["Bookmarks"] = sessionBookmarks;
         }
 
         public IEnumerable<Bookmark> GetBookmarkList()

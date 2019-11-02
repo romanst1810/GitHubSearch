@@ -4,6 +4,6 @@ namespace GitHubSearch.Interfaces
 {
     interface IGitHubSearch
     {
-        GithubJsonObject SearchGitHubResult(string searchUri);
+        SearchResultModel SearchGitHubResult(string searchUri);
     }
 }
